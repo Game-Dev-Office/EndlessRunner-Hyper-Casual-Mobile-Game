@@ -37,14 +37,14 @@ public class Station : MonoBehaviour
         }
         */
         int lemonNo = 0;
-        GameObject tempObj;
+        GameObject tempObj = null;
 
         foreach (var item in Inventory)
         {
             if (item.name == "Lemon")
             {
                 lemonNo++;
-                tempObj = item;
+                tempObj = tempObj == null ? item : tempObj; //Temp obje null ise itemi koysun, null deðilse tempobj olark devam etsin
             }
 
             if (lemonNo == 2)
