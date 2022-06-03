@@ -50,6 +50,7 @@ public class Station : MonoBehaviour
             if (lemonNo == 2)
             {
                 Inventory.Remove(item);
+                Inventory.Remove(tempObj);
 
                 GameObject GO = Instantiate(preparedItem, itemSpawnPosition.transform.position, Quaternion.identity);
                 break;
