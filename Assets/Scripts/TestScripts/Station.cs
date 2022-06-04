@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Station : MonoBehaviour
 {
-    [SerializeField] int maxInvCapacity          = 8;
-    [SerializeField] int invCapacity             = 0;
-    int maxLemonCapacity        = 4;
-    int lemonCount              = 0;
+    int maxInvCapacity     = 8;
+    int invCapacity        = 0;
+    int maxLemonCapacity   = 4;
+    int lemonCount         = 0;
     
     
     public List<GameObject> Inventory;
-    //public List<GameObject> stationInv;
-
     public bool isActive;
 
     public Transform holdPosition;
@@ -57,9 +55,9 @@ public class Station : MonoBehaviour
         }
     }*/
 
-    public bool takeLemon(GameObject go, Player player)
+    public bool TakeItem(GameObject go, Player player)
     {
-        if (lemonCount < maxLemonCapacity && invCapacity < maxInvCapacity)
+        if (go.GetComponent<Item>().itemData.displayName == "Lemon" && lemonCount < maxLemonCapacity && invCapacity < maxInvCapacity)
         {
             player.Inventory.Remove(go);
             player.invCapacity--;
@@ -73,7 +71,6 @@ public class Station : MonoBehaviour
             
             return true;
         }
-
         return false;
     }
 }

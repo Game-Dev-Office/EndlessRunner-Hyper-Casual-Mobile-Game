@@ -54,19 +54,19 @@ public class Player : MonoBehaviour
 
         else if (other.gameObject.name == "Station")
         {
-            st = other.GetComponent<Station>(); //Station componenti alýnýr
+            st = other.GetComponent<Station>();                             //Station componenti alýnýr
 
             for (int i = 0; i < Inventory.Count; i++)
             {
-                if (Inventory[i] != null && Inventory[i].GetComponent<Item>().itemData.displayName == "Lemon")
+                if (Inventory[i] != null)
                 {
-                    if (st.takeLemon(Inventory[i],this))
+                    if (st.TakeItem(Inventory[i],this))                     //station içindeki bool fonksiyonunda item alýmý gerçekleþir.
                     {
-                        Debug.Log("ENVANTERE ÝSTASYONA ALINDI");
+                        Debug.Log("ENVANTERE ÝSTASYONA ALINDI");            //Eþya alýnýrsa alýndýðýna dair olan olaylar burda olur
                     }
                     else
                     {
-                        Debug.Log("ENVANTER DOLU OLDUÐU ÝÇÝN ALINAMADI");
+                        Debug.Log("ENVANTER DOLU OLDUÐU ÝÇÝN ALINAMADI");   //eþya alýnamazsa alýnamadýðýna dair olan olaylar burda olur
                         break;
                     }
                 }
