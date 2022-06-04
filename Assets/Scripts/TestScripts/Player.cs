@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     Station st = null;
 
-    [SerializeField] int maxInvCapacity = 8;
+    int maxInvCapacity = 8;
     public int invCapacity = 0;    
     public List<GameObject> Inventory = null;
     
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         else if (other.gameObject.name == "Station")
         {
             st = other.GetComponent<Station>();                             //Station componenti alýnýr
-
+             
             for (int i = 0; i < Inventory.Count; i++)
             {
                 if (Inventory[i] != null)
