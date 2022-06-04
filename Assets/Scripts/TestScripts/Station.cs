@@ -37,14 +37,15 @@ public class Station : MonoBehaviour
         }
         */
         int lemonNo = 0;
-        GameObject tempObj = null;
+        List<GameObject> tempObj = new List<GameObject>();
 
         foreach (var item in Inventory)
         {
             if (item.name == "Lemon")
             {
                 lemonNo++;
-                tempObj = tempObj == null ? item : tempObj; //Temp obje null ise itemi koysun, null deðilse tempobj olark devam etsin
+                //tempObj = tempObj == null ? item : tempObj; //Temp obje null ise itemi koysun, null deðilse tempobj olark devam etsin
+                tempObj.Add(item);
             }
 
             if (lemonNo == 2)//Tam Buraya yorum satýrý ekledim
@@ -54,8 +55,13 @@ public class Station : MonoBehaviour
             if (lemonNo == 2)
 
             {
-                Inventory.Remove(item);
-                Inventory.Remove(tempObj);
+                    //Inventory.Remove(item);
+                    //Inventory.Remove(tempObj);
+
+                    foreach (var _item in tempObj)
+                    {
+                        Inventory.Remove(_item);
+                    }
 
                 GameObject GO = Instantiate(preparedItem, itemSpawnPosition.transform.position, Quaternion.identity);
                 break;
