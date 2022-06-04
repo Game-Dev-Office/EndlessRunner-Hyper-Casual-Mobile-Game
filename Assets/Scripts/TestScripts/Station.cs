@@ -47,7 +47,7 @@ public class Station : MonoBehaviour
                 tempObj = tempObj == null ? item : tempObj; //Temp obje null ise itemi koysun, null deðilse tempobj olark devam etsin
             }
 
-            if (lemonNo == 2)
+            if (lemonNo == 2)//Tam Buraya yorum satýrý ekledim
             {
                 Inventory.Remove(item);
                 Inventory.Remove(tempObj);
