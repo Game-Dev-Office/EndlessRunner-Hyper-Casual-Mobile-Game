@@ -46,7 +46,7 @@ public class Station : MonoBehaviour
                 lemonNo++;
                 tempObj = tempObj == null ? item : tempObj; //Temp obje null ise itemi koysun, null deðilse tempobj olark devam etsin
             }
-
+            //Branch conflict testi
             if (lemonNo == 2)
             {
                 Inventory.Remove(item);
