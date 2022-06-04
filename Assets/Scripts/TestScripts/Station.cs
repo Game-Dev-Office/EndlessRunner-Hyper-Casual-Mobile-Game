@@ -4,29 +4,20 @@ using UnityEngine;
 
 public class Station : MonoBehaviour
 {
-    public int maxInvCapacity;
-    public int invCapacity;
+    int maxInvCapacity     = 8;
+    int invCapacity        = 0;
+    int maxLemonCapacity   = 4;
+    int lemonCount         = 0;
+    
+    
     public List<GameObject> Inventory;
-
     public bool isActive;
 
-    public GameObject holdPosition;
-    public GameObject itemSpawnPosition;
+    public Transform holdPosition;
+    public Transform itemSpawnPosition;
     public GameObject preparedItem;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        prepareItem();
-    }
-
-    private void prepareItem()
+   /* private void prepareItem()
     {
         /*
         if (isActive && Inventory.Count >= 2)
@@ -35,28 +26,51 @@ public class Station : MonoBehaviour
             GameObject GO = Instantiate(preparedItem, itemSpawnPosition.transform.position, Quaternion.identity);
             Destroy(GameObject.Find("stationed item"));
         }
-        */
+        
         int lemonNo = 0;
-        GameObject tempObj = null;
+        List<GameObject> tempObj = new List<GameObject>();
 
         foreach (var item in Inventory)
         {
             if (item.name == "Lemon")
             {
                 lemonNo++;
-                tempObj = tempObj == null ? item : tempObj; //Temp obje null ise itemi koysun, null deðilse tempobj olark devam etsin
+                //tempObj.Add(item);
+                Inventory.Add(maxLemonCapacity <= 4 ? item : null );
             }
 
-            if (lemonNo == 2)
-            {
-                Inventory.Remove(item);
-                Inventory.Remove(tempObj);
+            
+            if (maxLemonCapacity >= 2)
 
-                GameObject GO = Instantiate(preparedItem, itemSpawnPosition.transform.position, Quaternion.identity);
+            {
+                    foreach (var _item in Inventory)
+                    {
+                        if(maxLemonCapacity >= 2)    
+                        Inventory.Remove(_item);
+                    }
+
+                GameObject GO = Instantiate(preparedItem, itemSpawnPosition.position , Quaternion.identity);
                 break;
             }
         }
+    }*/
 
+    public bool TakeItem(GameObject go, Player player)
+    {
+        if (go.GetComponent<Item>().itemData.displayName == "Lemon" && lemonCount < maxLemonCapacity && invCapacity < maxInvCapacity)
+        {
+            player.Inventory.Remove(go);
+            player.invCapacity--;
 
+            Inventory.Add(go);
+            go.transform.SetParent(transform);
+            go.name = "stationed item";
+
+            lemonCount++;
+            invCapacity++;
+            
+            return true;
+        }
+        return false;
     }
 }

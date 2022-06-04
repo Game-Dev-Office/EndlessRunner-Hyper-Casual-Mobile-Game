@@ -4,24 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int maxInvCapacity;
-    public int invCapacity;    
-    public List<GameObject> Inventory;
+    Station st = null;
+
+    [SerializeField] int maxInvCapacity = 8;
+    public int invCapacity = 0;    
+    public List<GameObject> Inventory = null;
     
-    public GameObject holdPosition;
-    public GameObject childObject;
+    public Transform holdPosition;
+    //public GameObject childObject;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,13 +22,14 @@ public class Player : MonoBehaviour
             {
                 Inventory.Add(other.gameObject);
                 invCapacity++;
-                other.gameObject.transform.SetParent(this.transform);
+                other.gameObject.transform.SetParent(transform);
                 other.gameObject.transform.position = holdPosition.transform.position;
                 holdPosition.transform.position += new Vector3(0, other.gameObject.transform.localScale.y+0.1f, 0);
+                Destroy(other.GetComponent<Collider>());
             }
         }
 
-        if (other.gameObject.name == "Station")
+        /*if (other.gameObject.name == "Station")
         {
             for (int i = 0; i < Inventory.Count; i++)
             {
@@ -58,6 +50,27 @@ public class Player : MonoBehaviour
 
                 }
             }            
+        }*/
+
+        else if (other.gameObject.name == "Station")
+        {
+            st = other.GetComponent<Station>();                             //Station componenti alýnýr
+
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                if (Inventory[i] != null)
+                {
+                    if (st.TakeItem(Inventory[i],this))                     //station içindeki bool fonksiyonunda item alýmý gerçekleþir.
+                    {
+                        Debug.Log("ENVANTERE ÝSTASYONA ALINDI");            //Eþya alýnýrsa alýndýðýna dair olan olaylar burda olur
+                    }
+                    else
+                    {
+                        Debug.Log("ENVANTER DOLU OLDUÐU ÝÇÝN ALINAMADI");   //eþya alýnamazsa alýnamadýðýna dair olan olaylar burda olur
+                        break;
+                    }
+                }
+            }
         }
     }
 }
