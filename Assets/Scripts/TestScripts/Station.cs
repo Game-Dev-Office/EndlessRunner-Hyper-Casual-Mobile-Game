@@ -46,13 +46,11 @@ public class Station : MonoBehaviour
                 lemonNo++;
                 tempObj = tempObj == null ? item : tempObj; //Temp obje null ise itemi koysun, null deðilse tempobj olark devam etsin
             }
-<<<<<<< HEAD
+
 
 
             if (lemonNo == 2)//Tam Buraya yorum satýrý ekledim
 
-=======
->>>>>>> 57cabb370bd5ba1708b9b361dc83cbcde7565202
             //Branch conflict testi
             if (lemonNo == 2)
 
